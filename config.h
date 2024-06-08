@@ -1,9 +1,13 @@
+#include "temas.h"
+
+
 /*
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-
-static char *font = "Ubuntu Mono:pixelsize=19:antialias=true:autohint=true";
-/* static char *font = "Liberation Mono:pixelsize=19:antialias=true:autohint=true"; */
+// static char *font = "ComicShannsMono Nerd Font:pixelsize=25:antialias=true:autohint=true";
+// static char *font = "Terminess Nerd Font Mono:pixelsize=27:antialias=true:autohint=true";
+static char *font = "Hack Nerd Font Mono:pixelsize=25:antialias=true:autohint=true"; 
+// static char *font = "Monocraft:pixelsize=25:antialias=true:autohint=true"; 
 static int borderpx = 2;
 
 /*
@@ -38,6 +42,10 @@ wchar_t *worddelimiters = L" ";
 static unsigned int doubleclicktimeout = 300;
 static unsigned int tripleclicktimeout = 600;
 
+/*alpha*/
+float alpha = 0.8;
+
+
 /* alt screens */
 int allowaltscreen = 1;
 
@@ -58,12 +66,12 @@ static double maxlatency = 33;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 400;
 
 /*
  * thickness of underline and bar cursors
  */
-static unsigned int cursorthickness = 2;
+static unsigned int cursorthickness = 1;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -89,18 +97,23 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 8;
+unsigned int tabspaces = 4;
 
-
-
-/*
- * Default shape of cursor
- * 2: Block ("█")
- * 4: Underline ("_")
- * 6: Bar ("|")
- * 7: Snowman ("☃")
- */
-static unsigned int cursorshape = 4;
+/* * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
+ * Default style of cursor
+ * 0: blinking block
+ * 1: blinking block (default)
+ * 2: steady block ("â–ˆ")
+ * 3: blinking underline
+ * 4: steady underline ("_")
+ * 5: blinking bar
+ * 6: steady bar ("|")
+ * 7: blinking st cursor
+ * 8: steady st cursor
+*/
+static unsigned int cursorstyle = 3;
+static Rune stcursor = 0x2603; /* snowman ("â˜ƒ") */
+ 
 
 /*
  * Default columns and rows numbers
@@ -442,7 +455,6 @@ static char ascii_printable[] =
 
 // tudo relacionado a coloracao por favor colocar neste arquivo c        agradecido
 
-#include "temas.c"
 
 
 
